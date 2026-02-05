@@ -140,8 +140,8 @@ const GameSchema = z.object({
 export const createPaginatedSchema = <T extends z.ZodTypeAny>(itemSchema: T) =>
   z.object({
     count: z.number(),
-    next: z.string().url().nullable(),
-    previous: z.string().url().nullable(),
+    next: z.string().nullable(),
+    previous: z.string().nullable(),
     results: z.array(itemSchema),
   });
 
@@ -159,4 +159,6 @@ export type Genre = z.infer<typeof GenreSchema>;
 export type Store = z.infer<typeof StoreSchema>;
 export type StoreDetails = z.infer<typeof StoreDetailsSchema>;
 export type Tag = z.infer<typeof TagSchema>;
+
 export type Game = z.infer<typeof GameSchema>;
+export type GamesResponse = z.infer<typeof GamesResponseSchema>;
