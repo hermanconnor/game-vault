@@ -1,25 +1,14 @@
 import { ApiResponse, Game } from "./types";
 
-const RAWG_API_KEY = process.env.RAWG_API_KEY;
-const RAWG_BASE_URL = "https://api.rawg.io/api";
+const API_KEY = process.env.RAWG_API_KEY;
+const BASE_URL = "https://api.rawg.io/api";
 
-export async function getFeaturedGames(): Promise<ApiResponse<Game>> {
-  if (!RAWG_API_KEY) throw new Error("RAWG_API_KEY is not configured.");
+export async function fetchFeaturedGames(): Promise<ApiResponse<Game>> {
+  const response = await fetch("/api/featured-games", { cache: "force-cache" });
 
-  const params = new URLSearchParams({
-    key: RAWG_API_KEY,
-    page_size: "5",
-    ordering: "-added",
-    metacritic: "85,100",
-  });
+  if (!response.ok) throw new Error("Failed to fetch featured games");
 
-  const response = await fetch(`${RAWG_BASE_URL}/games?${params.toString()}`, {
-    next: { revalidate: 86400 }, // 24 hours in seconds
-  });
+  const data = await response.json();
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch featured games from RAWG");
-  }
-
-  return response.json();
+  return data;
 }

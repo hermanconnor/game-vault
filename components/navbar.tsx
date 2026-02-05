@@ -1,5 +1,5 @@
 import { Gamepad2 } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Navbar() {
   return (
@@ -7,7 +7,7 @@ export default function Navbar() {
       <div className="container mx-auto gap-4 p-4">
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Gamepad2 className="text-primary h-6 w-6" />
+            <Gamepad2 className="text-primary size-6" />
             <span className="text-xl font-bold">GameVault</span>
           </div>
 
