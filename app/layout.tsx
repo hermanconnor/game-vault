@@ -35,7 +35,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <main className="bg-background min-h-dvh">{children}</main>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

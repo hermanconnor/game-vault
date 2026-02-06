@@ -15,8 +15,7 @@ export async function GET() {
     key: API_KEY,
     page_size: "5",
     ordering: "-added",
-    metacritic: "85,100",
-    dates: "2024-01-01,2026-12-31",
+    metacritic: "80,100",
   });
 
   try {
