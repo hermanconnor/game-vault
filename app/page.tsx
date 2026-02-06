@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import { HeroCarousel } from "@/components/hero-carousel";
+import GamesSection from "@/components/games-section";
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -20,6 +21,8 @@ export default async function Home({ searchParams }: Props) {
         <div>
           <HeroCarousel />
         </div>
+
+        <GamesSection />
       </main>
     </>
   );
