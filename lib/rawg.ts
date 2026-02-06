@@ -1,4 +1,4 @@
-import { ApiResponse, Game, PlatformsResponse } from "./types";
+import { ApiResponse, Game, GenresResponse, PlatformsResponse } from "./types";
 
 const API_KEY = process.env.RAWG_API_KEY;
 const BASE_URL = "https://api.rawg.io/api";
@@ -39,6 +39,16 @@ export async function fetchPlatforms(): Promise<PlatformsResponse> {
   const response = await fetch("/api/platforms");
 
   if (!response.ok) throw new Error("Failed to fetch platforms");
+
+  const data = await response.json();
+
+  return data;
+}
+
+export async function fetchGenres(): Promise<GenresResponse> {
+  const response = await fetch("/api/genres");
+
+  if (!response.ok) throw new Error("Failed to fetch genres");
 
   const data = await response.json();
 

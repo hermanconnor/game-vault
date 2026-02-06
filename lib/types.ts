@@ -86,6 +86,13 @@ export interface Genre {
   image_background: string;
 }
 
+export interface GenresResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: Genre[];
+}
+
 // Store details interface
 export interface StoreDetails {
   id: number;
