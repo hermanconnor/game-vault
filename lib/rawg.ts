@@ -55,6 +55,20 @@ export async function fetchGenres(): Promise<GenresResponse> {
   return data;
 }
 
+export async function fetchGames(
+  options: FetchOptions = {},
+): Promise<ApiResponse<Game>> {
+  const params = buildParams(options);
+
+  const response = await fetch(`/api/games?${params.toString()}`);
+
+  if (!response.ok) throw new Error(`Fetch failed: ${response.statusText}`);
+
+  const data = await response.json();
+
+  return data;
+}
+
 export async function fetchGamesServerSide(
   options: FetchOptions = {},
 ): Promise<ApiResponse<Game>> {

@@ -1,6 +1,8 @@
 import Navbar from "@/components/navbar";
 import { HeroCarousel } from "@/components/hero-carousel";
-import GamesSection from "@/components/games-section";
+import { fetchGamesServerSide } from "@/lib/rawg";
+import GamesHeading from "@/components/games-heading";
+import GameGrid from "@/components/game-grid";
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -14,6 +16,15 @@ export default async function Home({ searchParams }: Props) {
   const ordering = typeof params.ordering === "string" ? params.ordering : "";
   const genre = typeof params.genre === "string" ? params.genre : "";
 
+  const initialGames = await fetchGamesServerSide({
+    page: 1,
+    pageSize: 20,
+    search,
+    platform,
+    ordering,
+    genre,
+  });
+
   return (
     <>
       <Navbar />
@@ -21,8 +32,11 @@ export default async function Home({ searchParams }: Props) {
         <div>
           <HeroCarousel />
         </div>
+        <section className="container mx-auto space-y-8 px-4">
+          <GamesHeading />
 
-        <GamesSection />
+          <GameGrid initialGames={initialGames} />
+        </section>
       </main>
     </>
   );
