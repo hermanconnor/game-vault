@@ -1,4 +1,3 @@
-// hooks/use-games.ts
 import { useMemo } from "react";
 import { useInfiniteQuery, keepPreviousData } from "@tanstack/react-query";
 import { fetchGames } from "@/lib/rawg";

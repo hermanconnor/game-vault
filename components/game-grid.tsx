@@ -1,12 +1,12 @@
 "use client";
 
-import { ApiResponse, Game } from "@/lib/types";
 import { InfiniteScroll } from "./infinite-scroll";
 import { GameCard } from "./game-card";
-import useInfiniteGames from "@/hooks/use-infinite-games";
 import EmptyState from "./empty-state";
 import GameGridSkeleton from "./game-grid-skeleton";
 import ErrorState from "./error-state";
+import useInfiniteGames from "@/hooks/use-infinite-games";
+import { ApiResponse, Game } from "@/lib/types";
 
 interface Props {
   initialGames: ApiResponse<Game>;
