@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function GameCardSkeleton() {
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden pt-0">
       <Skeleton className="aspect-video w-full" />
       <CardContent className="p-4">
         <Skeleton className="mb-2 h-6 w-3/4" />
