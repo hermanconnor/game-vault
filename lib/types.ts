@@ -13,9 +13,23 @@ export interface Rating {
 }
 
 // Short screenshot interface
-export interface ShortScreenshot {
+export interface Screenshot {
   id: number;
   image: string;
+  width: number;
+  height: number;
+  is_deleted: boolean;
+}
+
+// Game trailer interface
+export interface Trailer {
+  id: number;
+  name: string;
+  preview: string;
+  data: {
+    480: string;
+    max: string;
+  };
 }
 
 // Platform details interface
@@ -148,7 +162,7 @@ export interface Game {
   clip?: null | Record<string, unknown>;
   tags: Tag[];
   esrb_rating?: ESRBRating | null;
-  short_screenshots: ShortScreenshot[];
+  short_screenshots: Screenshot[];
 }
 
 export interface GameDetails extends Game {

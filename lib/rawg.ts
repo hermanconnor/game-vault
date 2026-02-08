@@ -1,4 +1,12 @@
-import { ApiResponse, Game, GenresResponse, PlatformsResponse } from "./types";
+import {
+  ApiResponse,
+  Game,
+  GameDetails,
+  GenresResponse,
+  PlatformsResponse,
+  Screenshot,
+  Trailer,
+} from "./types";
 
 const API_KEY = process.env.RAWG_API_KEY;
 const BASE_URL = "https://api.rawg.io/api";
@@ -78,10 +86,58 @@ export async function fetchGamesServerSide(
   params.append("key", API_KEY);
 
   const response = await fetch(`${BASE_URL}/games?${params.toString()}`, {
-    next: { revalidate: 3600 }, // Cache for 1 hour
+    next: { revalidate: 86400 }, // Cache for 24 hours
   });
 
   if (!response.ok) throw new Error("Failed to fetch games from server");
 
-  return response.json();
+  return await response.json();
+}
+
+export async function fetchGameDetails(
+  slug: string,
+): Promise<GameDetails | null> {
+  if (!API_KEY) throw new Error("API key not configured.");
+
+  const response = await fetch(`${BASE_URL}/games/${slug}?key=${API_KEY}`, {
+    next: { revalidate: 86400 },
+  });
+
+  if (!response.ok) {
+    if (response.status === 404) return null;
+
+    throw new Error("Failed to fetch game details");
+  }
+
+  return await response.json();
+}
+
+export async function fetchGameScreenshots(
+  gameId: number | string,
+): Promise<Screenshot[]> {
+  if (!API_KEY) throw new Error("API key not configured.");
+
+  const response = await fetch(
+    `${BASE_URL}/games/${gameId}/screenshots?key=${API_KEY}`,
+    { next: { revalidate: 86400 } },
+  );
+
+  if (!response.ok) throw new Error("Failed to fetch screenshots");
+
+  return await response.json();
+}
+
+export async function fetchGameTrailer(
+  gameId: number | string,
+): Promise<Trailer[]> {
+  if (!API_KEY) throw new Error("API key not configured.");
+
+  const response = await fetch(
+    `${BASE_URL}/games/${gameId}/movies?key=${API_KEY}`,
+    { next: { revalidate: 86400 } },
+  );
+
+  if (!response.ok) throw new Error("Failed to fetch trailers");
+
+  return await response.json();
 }

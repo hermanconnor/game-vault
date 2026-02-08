@@ -11,7 +11,7 @@ interface Props {
 
 export function GameCard({ game }: Props) {
   return (
-    <Link href={`/games/${game.id}`}>
+    <Link href={`/games/${game.slug}`}>
       <Card className="group cursor-pointer overflow-hidden pt-0 transition-all hover:-translate-y-1 hover:shadow-lg">
         <div className="bg-muted relative aspect-video overflow-hidden">
           {game.background_image ? (
