@@ -20,11 +20,7 @@ export default function GameTrailer({ trailers }: Props) {
             Your browser does not support the video tag.
           </video>
         </div>
-      ) : (
-        <div className="flex aspect-video w-full items-center justify-center rounded-xl bg-gray-800 text-gray-400">
-          No trailer available for this title.
-        </div>
-      )}
+      ) : null}
     </>
   );
 }

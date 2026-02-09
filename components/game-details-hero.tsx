@@ -16,6 +16,9 @@ export default function GameDetailsHero({ game }: Props) {
       <Image
         src={game.background_image || "/placeholder.svg"}
         alt={game.name}
+        fill
+        priority
+        sizes="100vw"
         className="absolute inset-0 h-full w-full object-cover"
       />
 

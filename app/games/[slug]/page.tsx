@@ -7,6 +7,7 @@ import {
 } from "@/lib/rawg";
 import GameScreenshots from "@/components/game-screenshots";
 import GameTrailer from "@/components/game-trailer";
+import GameDetailsHero from "@/components/game-details-hero";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -43,9 +44,11 @@ export default async function GamePage({ params }: Props) {
 
   return (
     <div>
+      {/* Hero Section */}
+      <GameDetailsHero game={game} />
       <section className="container mx-auto px-4 py-8 md:py-12">
+        {/* Main Content */}
         <div className="grid gap-8 lg:grid-cols-3">
-          {/* Main Content */}
           <div className="space-y-8 lg:col-span-2">
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold">Game Media</h2>

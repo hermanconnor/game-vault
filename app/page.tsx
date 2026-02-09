@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { fetchGamesServerSide } from "@/lib/rawg";
 import GamesHeading from "@/components/games-heading";
