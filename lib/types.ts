@@ -21,6 +21,10 @@ export interface Screenshot {
   is_deleted: boolean;
 }
 
+export interface ScreenshotResponse {
+  results: Screenshot[];
+}
+
 // Game trailer interface
 export interface Trailer {
   id: number;
@@ -30,6 +34,10 @@ export interface Trailer {
     480: string;
     max: string;
   };
+}
+
+export interface TrailerResponse {
+  results: Trailer[];
 }
 
 // Platform details interface
@@ -162,7 +170,7 @@ export interface Game {
   clip?: null | Record<string, unknown>;
   tags: Tag[];
   esrb_rating?: ESRBRating | null;
-  short_screenshots: Screenshot[];
+  short_screenshots: { id: number; image: string }[];
 }
 
 export interface GameDetails extends Game {
@@ -172,7 +180,6 @@ export interface GameDetails extends Game {
   publishers: { id: number; name: string }[];
   esrb_rating: ESRBRating | null;
   tags: (Genre & { slug: string })[];
-  screenshots: { id: number; image: string }[];
   playtime: number;
   stores: Store[];
 }

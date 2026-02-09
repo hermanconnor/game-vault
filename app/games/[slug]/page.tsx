@@ -1,6 +1,12 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { fetchGameDetails } from "@/lib/rawg";
+import {
+  fetchGameDetails,
+  fetchGameScreenshots,
+  fetchGameTrailer,
+} from "@/lib/rawg";
+import GameScreenshots from "@/components/game-screenshots";
+import GameTrailer from "@/components/game-trailer";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,9 +36,48 @@ export default async function GamePage({ params }: Props) {
 
   if (!game) notFound();
 
+  const [trailers, screenshots] = await Promise.all([
+    fetchGameTrailer(slug),
+    fetchGameScreenshots(slug),
+  ]);
+
   return (
     <div>
-      <h1>{game.name}</h1>
+      <section className="container mx-auto px-4 py-8 md:py-12">
+        <div className="grid gap-8 lg:grid-cols-3">
+          {/* Main Content */}
+          <div className="space-y-8 lg:col-span-2">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold">Game Media</h2>
+              <GameTrailer trailers={trailers.results} />
+              <GameScreenshots screenshots={screenshots.results} />
+            </div>
+
+            {/* About */}
+            <div className="space-y-4">
+              <h3 className="text-2xl font-semibold">About</h3>
+              <div className="prose prose-neutral dark:prose-invert max-w-none">
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                  {game.description_raw || "No description available."}
+                </p>
+              </div>
+            </div>
+
+            {/* Tags */}
+          </div>
+
+          {/* Sidebar */}
+          <aside className="space-y-6">
+            {/* Platforms */}
+
+            {/* Developers & Publishers */}
+
+            {/* Stores */}
+
+            {/* Website */}
+          </aside>
+        </div>
+      </section>
     </div>
   );
 }

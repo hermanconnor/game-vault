@@ -4,8 +4,8 @@ import {
   GameDetails,
   GenresResponse,
   PlatformsResponse,
-  Screenshot,
-  Trailer,
+  ScreenshotResponse,
+  TrailerResponse,
 } from "./types";
 
 const API_KEY = process.env.RAWG_API_KEY;
@@ -114,7 +114,7 @@ export async function fetchGameDetails(
 
 export async function fetchGameScreenshots(
   gameId: number | string,
-): Promise<Screenshot[]> {
+): Promise<ScreenshotResponse> {
   if (!API_KEY) throw new Error("API key not configured.");
 
   const response = await fetch(
@@ -129,7 +129,7 @@ export async function fetchGameScreenshots(
 
 export async function fetchGameTrailer(
   gameId: number | string,
-): Promise<Trailer[]> {
+): Promise<TrailerResponse> {
   if (!API_KEY) throw new Error("API key not configured.");
 
   const response = await fetch(

@@ -27,17 +27,14 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
-      <Navbar />
-      <main className="bg-background min-h-dvh">
-        <div>
-          <HeroCarousel />
-        </div>
-        <section className="container mx-auto space-y-8 px-4">
-          <GamesHeading />
+      <div>
+        <HeroCarousel />
+      </div>
+      <section className="container mx-auto space-y-8 px-4">
+        <GamesHeading />
 
-          <GameGrid initialGames={initialGames} />
-        </section>
-      </main>
+        <GameGrid initialGames={initialGames} />
+      </section>
     </>
   );
 }
