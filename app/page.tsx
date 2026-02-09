@@ -29,7 +29,7 @@ export default async function Home({ searchParams }: Props) {
       <div>
         <HeroCarousel />
       </div>
-      <section className="container mx-auto space-y-8 px-4">
+      <section className="container mx-auto space-y-8 px-8">
         <GamesHeading />
 
         <GameGrid initialGames={initialGames} />

@@ -83,7 +83,7 @@ export function HeroCarousel() {
 
       {/* Content */}
       <div className="absolute inset-0 flex items-end">
-        <div className="container mx-auto px-4 pb-16 md:pb-24">
+        <div className="container mx-auto px-8 pb-16 md:pb-24">
           <div className="animate-in fade-in slide-in-from-bottom-4 max-w-2xl space-y-6 duration-700">
             <div className="flex items-center gap-3">
               <Badge className="bg-primary text-primary-foreground rounded px-2.5 py-0.5 text-xs font-bold tracking-wider uppercase">

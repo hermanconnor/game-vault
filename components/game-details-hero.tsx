@@ -41,7 +41,7 @@ export default function GameDetailsHero({ game }: Props) {
 
       {/* Hero Content */}
       <div className="absolute inset-0 flex items-end">
-        <div className="container mx-auto px-4 pb-8 md:pb-12">
+        <div className="container mx-auto px-8 pb-8 md:pb-12">
           <div className="max-w-4xl space-y-4">
             {/* Badges row */}
             <div className="flex flex-wrap items-center gap-2">
