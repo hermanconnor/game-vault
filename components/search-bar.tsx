@@ -24,6 +24,8 @@ export default function SearchBar() {
       if (trimmed) {
         router.push(`/search?q=${encodeURIComponent(trimmed)}`);
       }
+
+      setValue("");
     },
     [value, router],
   );
