@@ -1,6 +1,6 @@
 import { Gamepad2 } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
-import SearchBar from "@/components/search-bar";
+import SearchBar from "./search-bar";
 
 export default function Navbar() {
   return (
@@ -12,7 +12,9 @@ export default function Navbar() {
             <span className="text-xl font-bold">GameVault</span>
           </div>
 
-          <SearchBar />
+          <div>
+            <SearchBar />
+          </div>
 
           <ModeToggle />
         </nav>

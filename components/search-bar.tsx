@@ -1,47 +1,47 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Search, Loader2 } from "lucide-react";
+import { useState, useCallback, useRef } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import useGameFilters from "@/hooks/use-game-filters";
-import { useDebounce } from "@/hooks/use-debounce";
 
 export default function SearchBar() {
-  const { search, setSearch } = useGameFilters();
-  const [value, setValue] = useState(search);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const { debouncedValue, isDebouncing } = useDebounce(value, 500);
+  const isSearchPage = pathname === "/search";
+  const currentQuery = isSearchPage ? searchParams.get("q") || "" : "";
 
-  // Sync local input with URL (e.g., if user clears filters or hits back button)
-  useEffect(() => {
-    setValue(search);
-  }, [search]);
+  const [value, setValue] = useState(currentQuery);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Sync URL with debounced input
-  useEffect(() => {
-    // CRITICAL: Only trigger the router push if the values actually differ
-    if (debouncedValue !== search) {
-      setSearch(debouncedValue);
-    }
-  }, [debouncedValue, search, setSearch]);
+  const handleSubmit = useCallback(
+    (e: React.SubmitEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const trimmed = value.trim();
+      if (trimmed) {
+        router.push(`/search?q=${encodeURIComponent(trimmed)}`);
+      }
+    },
+    [value, router],
+  );
 
   return (
-    <div className="relative">
-      <div className="absolute top-1/2 left-3 -translate-y-1/2">
-        {isDebouncing ? (
-          <Loader2 className="text-muted-foreground size-4 animate-spin" />
-        ) : (
-          <Search className="text-muted-foreground size-4" />
-        )}
-      </div>
-
+    <form onSubmit={handleSubmit} className="relative">
+      <Search className="text-muted-foreground absolute top-1/2 left-3 size-4 -translate-y-1/2" />
       <Input
+        // The key prop ensures that if currentQuery changes (via URL),
+        // the state resets to match it.
+        key={currentQuery}
+        ref={inputRef}
         type="search"
         placeholder="Search games..."
         value={value}
         onChange={(e) => setValue(e.target.value)}
         className="pr-9 pl-9"
       />
-    </div>
+    </form>
   );
 }
