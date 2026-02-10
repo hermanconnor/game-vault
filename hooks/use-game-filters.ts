@@ -16,20 +16,29 @@ const useGameFilters = () => {
   const updateParams = useCallback(
     (updates: Record<string, string | null>) => {
       const params = new URLSearchParams(searchParams.toString());
+      let hasChanged = false;
 
       Object.entries(updates).forEach(([key, value]) => {
-        if (value) {
-          params.set(key, value);
-        } else {
-          params.delete(key);
+        const currentValue = params.get(key) || "";
+        const newValue = value ?? "";
+
+        if (currentValue !== newValue) {
+          hasChanged = true;
+          if (value) {
+            params.set(key, value);
+          } else {
+            params.delete(key);
+          }
         }
       });
 
-      if (!updates.page && params.has("page")) {
-        params.set("page", "1");
+      if (hasChanged) {
+        // Reset to page 1 on filter change
+        if (!updates.page && params.has("page")) {
+          params.set("page", "1");
+        }
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
       }
-
-      router.push(`${pathname}?${params.toString()}`, { scroll: false });
     },
     [pathname, router, searchParams],
   );
