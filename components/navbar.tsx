@@ -9,7 +9,7 @@ export default function Navbar() {
         <nav className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Gamepad2 className="text-primary size-6" />
-            <span className="text-xl font-bold">GameVault</span>
+            <span className="hidden text-xl font-bold sm:block">GameVault</span>
           </div>
 
           <div>
