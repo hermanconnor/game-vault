@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import useGameFilters from "@/hooks/use-game-filters";
 import usePlatforms from "@/hooks/use-platforms";
 import useGenres from "@/hooks/use-genres";
@@ -13,22 +14,21 @@ export default function GamesHeading() {
   const { platform, setPlatform, genre, setGenre, ordering, setOrdering } =
     useGameFilters();
 
-  const platformName = platform
-    ? platformsData?.results.find((p) => p.id.toString() === platform)?.name
-    : null;
-  const genreName = genre
-    ? genresData?.results.find((g) => g.id.toString() === genre)?.name
-    : null;
+  const heading = useMemo(() => {
+    const platformName = platformsData?.results.find(
+      (p) => p.id.toString() === platform,
+    )?.name;
 
-  let heading = "Games";
+    const genreName = genresData?.results.find(
+      (g) => g.id.toString() === genre,
+    )?.name;
 
-  if (platformName && genreName) {
-    heading = `${platformName} ${genreName} Games`;
-  } else if (platformName) {
-    heading = `${platformName} Games`;
-  } else if (genreName) {
-    heading = `${genreName} Games`;
-  }
+    if (platformName && genreName) return `${platformName} ${genreName} Games`;
+    if (platformName) return `${platformName} Games`;
+    if (genreName) return `${genreName} Games`;
+
+    return "All Games";
+  }, [platform, genre, platformsData, genresData]);
 
   return (
     <header>
