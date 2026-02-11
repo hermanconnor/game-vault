@@ -32,11 +32,11 @@ export default function GamesHeading() {
 
   return (
     <header>
-      <div className="flex flex-col gap-4 sm:justify-between md:flex-row">
+      <div className="flex flex-col flex-wrap gap-4 md:flex-row md:justify-between lg:flex-nowrap">
         <h2 className="animate-in fade-in text-3xl font-bold tracking-tight text-balance duration-500">
           {heading}
         </h2>
-        <div className="flex flex-col gap-4 sm:justify-between md:flex-row">
+        <div className="flex flex-col gap-4 md:flex-row">
           <PlatformSelector
             data={platformsData}
             platform={platform}
